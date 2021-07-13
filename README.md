@@ -11,3 +11,28 @@
 ## Mensajes
 
 - 100ms between two messages
+
+
+| Byte Number | Name      | Value       | Descripcion                                                          |
+|-------------|-----------|-------------|----------------------------------------------------------------------|
+| 1           | MSG       | Ver Tabla   |                                                                      |
+| 2           | LEN       | Ver tabla   |                                                                      |
+| 3           | Reservado | 0x05 / 0x50 | 0x05 mensaje para RTS Transmitter 0x50 mensaje desde RTS transmitter |
+| 4-6         | SRC@      |             | Si el emisor no es Somfy la dir debe ir entre FFFF00 y FFFFFE        |
+| 7-9         | DEST@     |             | Ver en la etiqueta del producto. En formato LSBF                     |
+| ...         | DATA      |             |                                                                      |
+| Byte n-1    | CHECKSUM  |             | Complemento a 1 de la suma del byte 1 al byte n-2                    |
+| Byte n      | CHECKSUM  |             |                                                                      |
+
+## Comandos
+### Move UP/DOWN
+
+- MSG = CTRL_POSITION = 0x80
+- LEN = 0x0D
+- DATA Lenght = 2
+- DATA Type = 8 bits
+- DATA Value = 
+    - 0 to 15 (RTS Channel)
+    - 1 = UP | 2 = DOWN | 3 = STOP | 4 = Fav Position     
+
+    
