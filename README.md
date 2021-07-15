@@ -35,4 +35,28 @@
     - 0 to 15 (RTS Channel)
     - 1 = UP | 2 = DOWN | 3 = STOP | 4 = Fav Position     
 
+
+### Send PROG Comand
+
+- MSG = SET_CHANNEL = 0x97
+- LEN = 0x0
+- DATA Lenght = 1
+- DATA Type = 8 bits
+- DATA Value = 
+    - 0 to 15 (RTS Channel)
+
+
+# ¿Como programo cortinas?
+
+Esto se basa en que ya tengo un control programado para la cortina:
+
+*Fuentes:*
+- https://www.youtube.com/watch?v=t267sqvygBk (min 2:30)
+- https://www.youtube.com/watch?v=i5wTanlfrbE
+
+1. Primero debo enviar el comando de programación al motor. Esto se hace desde el control ya programado situandome en el canal elegido (si el control es multicanal) y presionando el boton trasero (pequeño) por unos segundos hasta que la cortina suba y baje levemente.
+2. Envio comando de PROG desde el RS485 con el canal en el cual quiero poner dicha cortina.
+3. La cortina debería hacer "click-clack" (subir y bajar levemente)
+
+
     
