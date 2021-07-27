@@ -1,3 +1,4 @@
+#include "ESP32_Fibaro_RS485.h"
 #include "ServerFunctions.h"
 
 WebServer server(80);
@@ -8,15 +9,10 @@ WebServer server(80);
 // 192.168.0.200/cortina?CH=1&ACTION=U
 void accionarSobreCortina() 
 {
-   // mostrar por puerto serie
-   Serial.print(server.argName(0));
-   Serial.print(": ");
-   Serial.println(server.arg(0));
 
-   Serial.print(server.argName(1));
-   Serial.print(": ");
-   Serial.println(server.arg(1));
    
+   sendActionPayload(server.arg(0).toInt(), server.arg(1).charAt(0));
+
    // devolver respuesta
    //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
       server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
@@ -27,19 +23,28 @@ void accionarSobreCortina()
 // 192.168.0.200/cortina?CH=1
 void programarCortina() 
 {
-   // mostrar por puerto serie
-   Serial.print(server.argName(0));
-   Serial.print(": ");
-   Serial.println(server.arg(0));
-
-   Serial.print(server.argName(1));
-   Serial.print(": ");
-   Serial.println(server.arg(1));
+   sendProgramPayload(server.arg(0).toInt());
    
    // devolver respuesta
    //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
-      server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
-      server.send(200);
+   server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
+   server.send(200);
+
+
+}
+
+// Funcion al recibir petición POST
+// 192.168.0.200/cortina?CH=1
+void getChannelMode() 
+{
+   sendGetChannelPayload(server.arg(0).toInt());
+   
+   // devolver respuesta
+   //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
+   server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
+   server.send(200);
+
+
 }
 
 
@@ -66,9 +71,10 @@ void InitServer()
    // Definimos dos routeos
    server.on("/cortina", HTTP_POST, accionarSobreCortina);
    server.on("/programacion", HTTP_POST, programarCortina);
+   server.on("/channelmode", HTTP_POST, getChannelMode);
    server.onNotFound(handleNotFound);        // When a client requests an unknown URI (i.e. something other than "/"), call function "handleNotFound"
  
  
    server.begin();
-   Serial.println("HTTP server started");
+   DEBUG_SERIAL.println("HTTP server started");
 }

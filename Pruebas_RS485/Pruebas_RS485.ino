@@ -3,17 +3,15 @@
 
 void setup()
 {          
-      DEBUG_SERIAL.begin(9600);
- 
-      delay(3000);
-      DEBUG_SERIAL.println("Init");
-      
-      // 8 bits de datos. 1 bit de parada. Paridad odd
-      RS485_SERIAL.begin(4800,SERIAL_8O1);
 
-      //RS485_SERIAL.begin(9600);
-      
-      RS485_SERIAL.setTimeout(100);
+      #ifdef ACTIVATE_DEBUG
+            DEBUG_SERIAL.begin(9600);
+            delay(3000);
+            DEBUG_SERIAL.println("Init");
+      #endif
+            RS485_SERIAL.begin(4800,SERIAL_8O1);
+
+      RS485_SERIAL.setTimeout(1000);
 
       //Transmisor mode
       pinMode(RS485_CONTROL_PIN,OUTPUT);
@@ -34,22 +32,40 @@ void setup()
 void loop()
 {
       
+      // Modo ENVIO
       digitalWrite(RS485_CONTROL_PIN, HIGH);
-      delay(4000);
-      DEBUG_SERIAL.println("Enviando");
-      uint8_t *result = makeProgPayload(1);
+      #ifdef ACTIVATE_DEBUG
+            DEBUG_SERIAL.println("Enviando");
+      #endif
+      //uint8_t *result = makeGetChannelModePayload(1);
 
-      
-
-
+      //5F f3 fa ff 0 0 42 20 fa fe 5 a5
+      byte vector[] = {0x5F, 0xf3 ,0xfa ,0xff ,0x0 ,0x0 ,0x42 ,0x20 ,0xfa ,0xfe ,0x05 ,0xa5};
+      //RS485_SERIAL.write(vector,sizeof(vector));
+      RS485_SERIAL.write("");
       for (int i = 0;i<PROG_MSG_LENGTH;i++)
      {
             //RS485_SERIAL.print(result[i],HEX);
             //String b =String(result[i],HEX);
-            RS485_SERIAL.write(result[i]);  
-
-
+            RS485_SERIAL.write(vector[i]);  
+            delay(1);
+            //digitalWrite(ONBOARD_LED, !digitalRead(ONBOARD_LED));
      }
+     RS485_SERIAL.write(""); //->>> LINEA CLAVE!!!!!!!!!!!!!!
+       
+      for (int i = 0; i < PROG_MSG_LENGTH ;i++)
+      {
+            DEBUG_SERIAL.print("Complemento a 1: ");
+            DEBUG_SERIAL.println(vector[i],HEX);
+      }
+      // Modo recepcion
+      digitalWrite(RS485_CONTROL_PIN, LOW); 
+
+      
+
+
+
+     
 
       /*
       String deveui="";
@@ -76,7 +92,7 @@ void loop()
       delay(1000);
       //Receptor mode
       digitalWrite(RS485_CONTROL_PIN, LOW); 
-      delay(4000);
+      //delay(4000);
 
       DEBUG_SERIAL.println("Esperando rta x 1min");
       unsigned long time = millis();
@@ -84,10 +100,10 @@ void loop()
 
 
       while(RS485_SERIAL.available())
-      {
-            DEBUG_SERIAL.println(RS485_SERIAL.read());        
+      {     
+            DEBUG_SERIAL.println("Lei:"); 
+            DEBUG_SERIAL.print(RS485_SERIAL.read(),HEX);        
       }
+
       delay(3000);
 }
-
-

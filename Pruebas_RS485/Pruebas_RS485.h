@@ -5,9 +5,12 @@
 #include "Constants.h"
 #include "Utils.h"
 
-#define DEBUG_SERIAL    Serial
-#define RS485_SERIAL    Serial1
+#define ACTIVATE_DEBUG
 
-#define RS485_CONTROL_PIN     7
+#define DEBUG_SERIAL    Serial
+#define RS485_SERIAL    Serial2
+
+#define RS485_CONTROL_PIN     33
+
 
 #endif
