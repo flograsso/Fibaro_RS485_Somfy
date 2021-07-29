@@ -3,6 +3,8 @@
 
 
 #define INTERVAL_LOSS_WIFI    30000
+#define WIFIOK_LED_PIN        26
+
 
 
 void ConnectWiFi_STA(bool useStaticIP = false);

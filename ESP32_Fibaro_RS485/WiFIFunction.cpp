@@ -34,5 +34,8 @@ void testWifiConnection()
       WiFi.disconnect();
       WiFi.reconnect();
       previousMillis = millis();
+      digitalWrite(WIFIOK_LED_PIN,LOW); // Sin wifi
   }
+  else
+    digitalWrite(WIFIOK_LED_PIN,HIGH); //Wifi ok
 }

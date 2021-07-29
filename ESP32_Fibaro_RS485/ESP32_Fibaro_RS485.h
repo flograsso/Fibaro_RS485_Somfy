@@ -14,7 +14,8 @@
 #define ACTIVATE_DEBUG
 
 #define RS485_CONTROL_PIN     33
-
+#define WIFIOK_LED_PIN        26
+#define SENDING_LED_PIN       27
 extern WebServer server;
 
 #endif

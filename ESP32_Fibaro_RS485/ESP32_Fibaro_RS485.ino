@@ -25,6 +25,12 @@ void setup()
       #endif
       initSerialRS485();
 
+      pinMode(WIFIOK_LED_PIN,OUTPUT);     // Led verde
+      pinMode(SENDING_LED_PIN,OUTPUT);   // Led rojo
+
+      digitalWrite(WIFIOK_LED_PIN,LOW);
+      digitalWrite(SENDING_LED_PIN,LOW);
+
       ConnectWiFi_STA(true);
       InitServer();
       

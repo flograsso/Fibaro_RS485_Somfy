@@ -11,7 +11,7 @@ uint8_t * makeGetChannelModePayload(uint8_t channel);
 void sendActionPayload(uint8_t channel, char action);
 void sendProgramPayload(uint8_t channel);
 void sendGetChannelPayload(uint8_t channel);
-
+void ledBlink(byte pin);
 
 
 #endif

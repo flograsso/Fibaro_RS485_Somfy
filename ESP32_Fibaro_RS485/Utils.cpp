@@ -307,3 +307,12 @@ void sendProgramPayload(uint8_t channel)
       #endif
       
 }
+
+
+void ledBlink(byte pin)
+{
+      digitalWrite(pin,HIGH);
+      delay(500);
+      digitalWrite(pin,LOW);
+
+}
