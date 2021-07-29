@@ -4,12 +4,12 @@
 
 #include <WiFi.h>
 
-const char* ssid     = "Cazuela_2.4";
-const char* password = "c@fec0n1eche";
+const char* ssid     = "DANTE";
+const char* password = "0012963352";
 const char* hostname = "ESP32_Fibaro";
 
-IPAddress ip(192, 168, 0, 200);
-IPAddress gateway(192, 168, 0, 1);
+IPAddress ip(192, 168, 68, 200);
+IPAddress gateway(192, 168, 68, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 
