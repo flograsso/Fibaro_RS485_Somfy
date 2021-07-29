@@ -17,6 +17,8 @@ void accionarSobreCortina()
    //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
       server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
       server.send(200);
+
+      ledBlink(SENDING_LED_PIN);
 }
 
 // Funcion al recibir petición POST
@@ -29,6 +31,8 @@ void programarCortina()
    //server.send(200, "text/plain", String("POST ") + server.arg(String("Id")) + " " + server.arg(String("Status")));
    server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
    server.send(200);
+
+   ledBlink(SENDING_LED_PIN);
 
 
 }
