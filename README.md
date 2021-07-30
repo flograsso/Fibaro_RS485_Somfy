@@ -1,5 +1,25 @@
 # Fibaro_RS485_ESP32
 
+## SICA
+- CH0: Cortina Quincho 5
+- CH1: Toldo lateral cocina
+- CH2: Toldo quincho
+- CH3: Cortina Suite 1
+- CH4: Cortina Suite 2
+- CH5: Cortina Suite 3
+- CH6: Cortina Suite 4
+- CH7: Cortina Habitacion Secundaria 1
+- CH8: Cortina Habitacion Secundaria 2
+- CH9: Toldo galería 1
+- CH10: Toldo galería 2
+- CH11: Toldo galería 3
+- CH12: Cortina Quincho 1
+- CH13: Cortina Quincho 2
+- CH14: Cortina Quincho 3
+- CH15: Cortina Quincho 4
+
+
+
 ## RS485
 
 - Baudrate: 4800
