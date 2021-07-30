@@ -22,7 +22,7 @@ void accionarSobreCortina()
 }
 
 // Funcion al recibir petición POST
-// 192.168.0.200/cortina?CH=1
+// 192.168.0.200/programacion?CH=1
 void programarCortina() 
 {
    sendProgramPayload(server.arg(0).toInt());
@@ -38,7 +38,7 @@ void programarCortina()
 }
 
 // Funcion al recibir petición POST
-// 192.168.0.200/cortina?CH=1
+// 192.168.0.200/channelmode?CH=1
 void getChannelMode() 
 {
    sendGetChannelPayload(server.arg(0).toInt());
